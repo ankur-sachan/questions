@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun 21 18:48:06 2020
+
+@author: ankur
+"""
+#defining class Solution for cache functionalty
+# there is function faultTolerance which will write data in memory in-case system gets crash unexpectedly  
+
+class Solution():
+    def __init__(self,data):
+        self.data=data
+        
+    def insertInLocal(self,key,value):
+        self.data[key]=value
+        print("Current status of dictionary {}".format(self.data))
+        
+    #Below function will connect to DB and works like a getter function 
+    #input key is provided to get the details
+    #assuming everytime we get a list of elements for given key. 
+    #this compelte scenario can be stored in dictionary in  a key value pair
+    def checkTicketStatus(self,key):
+        #below  function connects to Db and fetches ticket information 
+         if key in self.data.keys():
+            print("value available in local")
+            value=self.data[key]
+         else:
+            #value=getFromDb()  --> assuming we get below values
+            value =["Project","Raised_by","component_id","Criticality","resolved"]
+            ## function call to store information in dictionary
+            self.insertInLocal(key,value)
+         return value
+         
+    #Using this fucntion data will be dumped in text file in case program crashes in between
+    # we can also use this file in case required.
+    def faultTolerance(self):
+        with open(r"C:\Users\ankur\OneDrive\Desktop\local_backup_for_fault_tolerence.txt",mode='w') as p:
+            p.write(str(self.data))
+    
+    
+#passing dictionary object   
+k=Solution({})
+k.checkTicketStatus("INC00000000")
+k.checkTicketStatus("INC00000001")
+k.checkTicketStatus("INC00000002")
+k.checkTicketStatus("INC00000003")
