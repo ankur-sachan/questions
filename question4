@@ -2,6 +2,7 @@
 """
 Created on Sun Jun 21 18:48:06 2020
 
+
 @author: ankur
 """
 #defining class Solution for cache functionalty
@@ -36,6 +37,7 @@ class Solution():
     def faultTolerance(self):
         with open(r"C:\Users\ankur\OneDrive\Desktop\local_backup_for_fault_tolerence.txt",mode='w') as p:
             p.write(str(self.data))
+            
     
     
 #passing dictionary object   
